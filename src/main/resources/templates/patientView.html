@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+
+<head>
+    <meta charset="UTF-8">
+    <title>patients List</title>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.6.0/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="card mt-3 " >
+            <div class="navbar" >
+                <a class="btn btn-success" type="submit" th:href="@{/index}" >Home</a>
+                <a class="btn btn-danger" type="submit" th:href="@{/logout}">LOGOUT</a>
+            </div>
+            <div class="card-header">
+                Liste Patients
+            </div>
+            <div class="card-body">
+                <form method="get" th:action="@{index}" >
+                    <label>enter the name</label>
+                    <input type="text" name="name" th:value="${name}">
+                    <button class="btn btn-success">Search</button>
+                    <a  class="btn btn-primary"sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{formPatient}" >Add Patient</a>
+                </form>
+
+
+                <table class="table" >
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Date</th>
+                        <th>Score</th>
+                        <th>Malade</th>
+                        <th sec:authorize="hasRole('ROLE_ADMIN')">Delete</th>
+                        <th sec:authorize="hasRole('ROLE_ADMIN')">Edit</th>
+                    </tr>
+                    <tr th:each="p:${listPatient}" >
+                        <td th:text="${p.id}"></td>
+                        <td th:text="${p.nom}"></td>
+                        <td th:text="${p.birthDate}"></td>
+                        <td th:text="${p.score}"></td>
+                        <td th:text="${p.malade}"></td>
+                        <td  sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a class="btn btn-danger" th:href="@{deletePatient(id=${p.id},name=${name},page=${currentPage},size=${size})}">Delete</a>
+                        </td>
+                        <td sec:authorize="hasRole('ROLE_ADMIN')" >
+                            <a class="btn btn-success" th:href="@{editPatient(id=${p.id})}">Edit</a>
+                        </td>
+                    </tr>
+                </table>
+                <ul  class="nav nav-pills">
+                    <li th:each="page,status:${pages}" >
+                        <a th:class="${status.index==currentPage ? 'btn btn-primary' : 'btn'}"
+                           th:href="@{index(page=${status.index},name=${name})}" th:text="${status.index}" ></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

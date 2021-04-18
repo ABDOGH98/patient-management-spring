@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Add patient </title>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.6.0/css/bootstrap.min.css" />
+</head>
+<body>
+
+    <div class="mt-5">
+        <div class="container">
+            <div class="navbar" >
+                <a class="btn btn-success" type="submit" th:href="@{/index}" >Home</a>
+                <a class="btn btn-danger" type="submit" th:href="@{/logout}">LOGOUT</a>
+            </div>
+            <form th:action="@{savePatient}" method="post" >
+                <div class="form-group">
+                    <input type="hidden" name="id" class="form-control" th:value="${patient.id}">
+
+                </div>
+                <div class="form-group">
+                    <label  >Name :</label>
+                    <input type="text" name="nom" class="form-control" th:value="${patient.nom}">
+                    <span ></span>
+                </div>
+                <div class="form-group">
+                    <label  >Date de naissance :</label>
+                    <input type="date" name="birthDate" class="form-control" th:value="${patient.birthDate}">
+                    <span ></span>
+                </div>
+                <div class="form-group">
+                    <label  >Score :</label>
+                    <input type="number" name="score" class="form-control" th:value="${patient.score}">
+                    <span></span>
+                </div>
+                <div class="form-group">
+                    <label  >Malade :</label>
+                    <input type="checkbox" name="malade" th:checked="${patient.malade}">
+                    <span></span>
+                </div>
+                <button class="btn btn-success" type="submit" >Save</button>
+            </form>
+
+        </div>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>403</title>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.6.0/css/bootstrap.min.css" />
+</head>
+<body>
+    <div>
+        <div class="navbar" >
+            <a class="btn btn-success" type="submit" th:href="@{/index}" >Home</a>
+            <a class="btn btn-danger" type="submit" th:href="@{/logout}">LOGOUT</a>
+        </div>
+        <h1 class="text-danger align-content-center" >
+
+            YOU ARE NOT HAVE ACCESS OR NOT AUTHORIZED :(  x(
+        </h1>
+    </div>
+
+</body>
+</html>
